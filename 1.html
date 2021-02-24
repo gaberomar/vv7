@@ -1,4 +1,14 @@
 
+
+
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html,body{margin:0;padding:0;background:#000;;}</style>
+<link href="http://101vn.com/s/videojs/video-js.min.css" rel="stylesheet">
+<script src="http://101vn.com/s/videojs/videojs-ie8.min.js"></script>
+<script src="http://101vn.com/s/videojs/video.js"></script>
+<script src="http://101vn.com/s/vjs-hls.min.js"></script>
 <script>
 function getParam ( sname )
 {
@@ -10,48 +20,51 @@ function getParam ( sname )
 var sv = getParam("sv");
 
 </script>
-<meta name="referrer" content="no-referrer">
-<style>html,body{margin:0;padding:0;background:#000;;}</style>
-<link href="http://101vn.com/s/videojs/video-js.min.css" rel="stylesheet">
-<script src="http://101vn.com/s/videojs/videojs-ie8.min.js"></script>
-<script src="http://101vn.com/s/videojs/video.js"></script>
-<script src="http://101vn.com/s/vjs-hls.min.js"></script>
 <body onload="init()">
-<script>
 
-
-	 if (navigator.userAgent.match(/Android/i) ||  navigator.userAgent.match(/webOS/i) ||	 navigator.userAgent.match(/iPhone/i) ||     navigator.userAgent.match(/iPod/i) ||          navigator.userAgent.match(/iPad/i) ||		 navigator.userAgent.match(/Mobile Safari/i) ||            navigator.userAgent.match(/Blackberry/i)){
-				document.write("\<video style=\"z-index:2;width:100%;height:200px;background-color:#000;-o-object-fit:fill;object-fit:fill\"  controls=\"controls\" autoplay=\"true\" preload=\"auto\" height=\"auto\" src=\""+sv+"\"\>\<\/video\>");
-			 }else {
-				 
-				 document.write('<video id="streaming" autoplay  preload="auto" height="100%" width="100%" class="video-js" controls data-setup="{&quot;language&quot;: &quot;vi&quot;}"></video>');
-
+		<video id="streaming" autoplay preload="auto"  height="100%" width="100%" class="video-js" controls data-setup='{"language": "vi"}'></video>
+	
+	<script>
+		 var i = 0;
 		function play(cid) {
-
-
 				src = cid;
 			player = videojs("streaming");
 			player.ready(function() {
 				player.src({
-					src: src,
+					src: sv,
 					type: "application/x-mpegURL",
-					autoplay: "false",
 				});
 			});
-
-			//player.play();
-
+			player.play();
 		}
-
-		play(sv);
-			 }
+		function reload(i) {
+			if (player.paused() && player.error_ != null )
+			{
+				var src = "";
+				if(src != ''){
+					if(i%3 == 0){
+						play(sv);
+					} else play('sv');
+				}else 	play('sv');
+			}
+			 
+			 
+				
+		}
+		function init() {
+			var i = 1;
+			play('sv');
+			setInterval(function() {reload(i); i++ }, 1000);
+		}
+		
+		
 	</script>
 <div id="videojs">
 </div>
 <style>
 	.video-js {
 		width: 100%;
-		height: 95%;
+		height: 100%;
 	}
 	body {
 		text-align: center;
@@ -59,10 +72,14 @@ var sv = getParam("sv");
 	}
 	#videojs {
 		width: 100%;
-		height: 95%;
+		height: 100%;
 	}.streaming-dimensions{
 				width: 100% !important;
-		height: 95% !important;
+		height: 100% !important;
 	}
 </style>
 </body>
+<span style='position:absolute; bottom:30px!important; left: 10px!important; max-bottom: 10px!important; max-width: 170%!important; width: 22%!important; font-size: 13px; font-weight: bold;color: #ff0;'>
+<img style= 'left: 10px!important; max-height: 50px!important; max-width: 100%!important; width: 90%!important;' src='http://1.bp.blogspot.com/-6Utq5JU_l2w/YCAo8gB0x7I/AAAAAAAALZU/YJxOQHkvIywpU4znsCgYEvIsc-U8ijY1wCK4BGAYYCw/s1600/2.png'></span>
+
+
